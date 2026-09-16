@@ -1,0 +1,6 @@
+# CodeIgniter 4 writable runtime files
+/writable/debugbar/*
+/writable/logs/*
+/writable/session/*
+/writable/cache/*
+/writable/uploads/*
