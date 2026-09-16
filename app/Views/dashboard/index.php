@@ -1665,7 +1665,604 @@
             }
 
         }
+.cellc-service-card {
+    cursor: pointer;
+}
 
+.cellc-service-card:active {
+    transform: scale(.98);
+}
+/* =========================================================
+   CELL C AIRTIME MODAL
+========================================================= */
+
+.cellc-modal .modal-dialog {
+    max-width: 680px;
+    margin: 1.75rem auto;
+}
+
+.cellc-modal .modal-content {
+    border: none;
+    border-radius: 22px;
+    overflow: hidden;
+    background: #ffffff;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, .22);
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.cellc-modal-header {
+    padding: 20px 22px;
+    background: linear-gradient(
+        135deg,
+        #BF2036 0%,
+        #A9192F 100%
+    );
+
+    color: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cellc-header-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.cellc-logo-box {
+    width: 55px;
+    height: 55px;
+
+    background: #ffffff;
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 6px;
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .12);
+}
+
+.cellc-logo-box img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+}
+
+.cellc-modal-header h5 {
+    margin: 0;
+
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.cellc-modal-header p {
+    margin: 3px 0 0;
+
+    font-size: 12px;
+
+    opacity: .80;
+}
+
+
+/* CLOSE */
+
+.cellc-close {
+    width: 38px;
+    height: 38px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, .14);
+
+    color: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.cellc-close:hover {
+    background: rgba(255, 255, 255, .25);
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+.cellc-modal-body {
+    padding: 24px;
+}
+
+.cellc-title-row {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 18px;
+}
+
+.cellc-title-row h6 {
+    margin: 0;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    color: #172b4d;
+}
+
+.cellc-title-row span {
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 12px;
+
+    color: #8b95a4;
+}
+
+
+/* SELECT BADGE */
+
+.cellc-selected-badge {
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    background: #f5f7fb;
+
+    color: #8b95a4;
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.cellc-selected-badge.active {
+    background: #FBECEF;
+    color: #BF2036;
+}
+
+
+/* =========================================================
+   AMOUNT GRID
+========================================================= */
+
+.cellc-amount-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 12px;
+}
+
+
+/* AMOUNT CARD */
+
+.cellc-amount {
+    position: relative;
+
+    min-height: 82px;
+
+    border: 1px solid #e7ebf0;
+
+    border-radius: 14px;
+
+    background: #ffffff;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 3px;
+
+    transition:
+        transform .18s ease,
+        border-color .18s ease,
+        box-shadow .18s ease,
+        background .18s ease;
+}
+
+.cellc-amount:hover {
+    transform: translateY(-3px);
+
+    border-color: #BF2036;
+
+    box-shadow:
+        0 8px 22px rgba(
+            191,
+            32,
+            54,
+            .12
+        );
+}
+
+
+/* CURRENCY */
+
+.cellc-amount .currency {
+    font-family: Georgia, serif;
+
+    font-size: 17px;
+
+    font-weight: 600;
+
+    color: #7d8795;
+}
+
+
+/* NUMBER */
+
+.cellc-amount strong {
+    font-family: Georgia, serif;
+
+    font-size: 25px;
+
+    font-weight: 700;
+
+    color: #172b4d;
+}
+
+
+/* SELECTED */
+
+.cellc-amount.selected {
+    background: #BF2036;
+
+    border-color: #BF2036;
+
+    box-shadow:
+        0 8px 24px rgba(
+            191,
+            32,
+            54,
+            .25
+        );
+
+    transform: translateY(-2px);
+}
+
+.cellc-amount.selected .currency,
+.cellc-amount.selected strong {
+    color: #ffffff;
+}
+
+
+/* CHECK */
+
+.cellc-amount.selected::after {
+    content: "\f26e";
+
+    font-family:
+        "bootstrap-icons";
+
+    position: absolute;
+
+    top: 7px;
+    right: 8px;
+
+    width: 18px;
+    height: 18px;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    color: #BF2036;
+
+    font-size: 11px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* =========================================================
+   SELECTION PREVIEW
+========================================================= */
+
+.cellc-selection {
+    margin-top: 20px;
+
+    padding: 13px 15px;
+
+    border-radius: 13px;
+
+    background: #f8f9fb;
+
+    border: 1px solid #edf0f4;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+.selection-icon {
+    width: 42px;
+    height: 42px;
+
+    border-radius: 11px;
+
+    background: #FBECEF;
+
+    color: #BF2036;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 17px;
+}
+
+.selection-info {
+    flex: 1;
+}
+
+.selection-info span {
+    display: block;
+
+    font-size: 10px;
+
+    color: #8b95a4;
+
+    margin-bottom: 2px;
+}
+
+.selection-info strong {
+    font-size: 14px;
+
+    color: #172b4d;
+}
+
+.selection-check {
+    width: 28px;
+    height: 28px;
+
+    border-radius: 50%;
+
+    background: #e9edf2;
+
+    color: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 14px;
+
+    transition: .2s;
+}
+
+.selection-check.active {
+    background: #198754;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.cellc-modal-footer {
+    padding: 16px 24px;
+
+    border-top: 1px solid #edf0f4;
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+}
+
+
+/* CANCEL */
+
+.cellc-cancel-btn {
+    border: 1px solid #e1e5ea;
+
+    background: #ffffff;
+
+    color: #667085;
+
+    padding: 11px 20px;
+
+    border-radius: 10px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.cellc-cancel-btn:hover {
+    background: #f5f7fb;
+}
+
+
+/* CONTINUE */
+
+.cellc-continue-btn {
+    border: none;
+
+    background: #BF2036;
+
+    color: #ffffff;
+
+    padding: 11px 22px;
+
+    border-radius: 10px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.cellc-continue-btn:hover:not(:disabled) {
+    background: #A9192F;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 6px 18px rgba(
+            191,
+            32,
+            54,
+            .20
+        );
+}
+
+.cellc-continue-btn:disabled {
+    background: #d9dde3;
+
+    color: #ffffff;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 575px) {
+
+    .cellc-modal .modal-dialog {
+        margin: 0;
+
+        min-height: 100vh;
+
+        display: flex;
+        align-items: flex-end;
+    }
+
+    .cellc-modal .modal-content {
+        width: 100%;
+
+        border-radius:
+            22px
+            22px
+            0
+            0;
+
+        max-height: 94vh;
+    }
+
+    .cellc-modal-header {
+        padding: 17px 16px;
+    }
+
+    .cellc-logo-box {
+        width: 48px;
+        height: 48px;
+    }
+
+    .cellc-modal-header h5 {
+        font-size: 16px;
+    }
+
+    .cellc-modal-body {
+        padding: 18px 15px;
+
+        overflow-y: auto;
+    }
+
+    .cellc-title-row {
+        margin-bottom: 14px;
+    }
+
+    .cellc-title-row h6 {
+        font-size: 15px;
+    }
+
+    .cellc-amount-grid {
+        grid-template-columns:
+            repeat(3, 1fr);
+
+        gap: 9px;
+    }
+
+    .cellc-amount {
+        min-height: 72px;
+
+        border-radius: 12px;
+    }
+
+    .cellc-amount strong {
+        font-size: 22px;
+    }
+
+    .cellc-amount .currency {
+        font-size: 15px;
+    }
+
+    .cellc-selection {
+        margin-top: 15px;
+    }
+
+    .cellc-modal-footer {
+        padding: 13px 15px;
+
+        display: grid;
+
+        grid-template-columns: 1fr 1.5fr;
+    }
+
+    .cellc-cancel-btn,
+    .cellc-continue-btn {
+        width: 100%;
+
+        justify-content: center;
+    }
+}
+
+
+/* VERY SMALL MOBILE */
+
+@media (max-width: 360px) {
+
+    .cellc-amount-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .cellc-amount {
+        min-height: 68px;
+    }
+
+}
     </style>
 
 </head>
@@ -2283,32 +2880,31 @@
         <div class="row g-3">
 
 <!-- CELL C -->
+<div class="col-6 col-md-4 col-lg-2">
 
-            <div class="col-6 col-md-4 col-lg-2">
+    <div class="service-card cellc-service-card"
+         onclick="openCellCModal()">
 
-                <div class="service-card">
+        <div class="service-image">
 
-                    <div class="service-image">
+            <img
+                src="<?= base_url('assets/images/services/prov3.png') ?>"
+                alt="Cell C"
+            >
 
-                        <img
-                            src="<?= base_url('assets/images/services/prov3.png') ?>"
-                            alt="Cell C"
-                        >
+        </div>
 
-                    </div>
+        <div class="service-name">
+            Cell C
+        </div>
 
-                    <div class="service-name">
-                        Cell C
-                    </div>
+        <div class="service-type">
+            Airtime & Data
+        </div>
 
-                    <div class="service-type">
-                        Airtime & Data
-                    </div>
+    </div>
 
-                </div>
-
-            </div>
-
+</div>
             <!-- MTN -->
 
             <div class="col-6 col-md-4 col-lg-2">
@@ -3436,12 +4032,469 @@
 
 </div>
 
+<!-- =========================================================
+     CELL C AIRTIME MODAL
+========================================================= -->
 
+<div class="modal fade cellc-modal"
+     id="cellcModal"
+     tabindex="-1"
+     aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+
+            <!-- MODAL HEADER -->
+            <div class="cellc-modal-header">
+
+                <div class="cellc-header-left">
+
+                    <div class="cellc-logo-box">
+
+                        <img
+                            src="<?= base_url('assets/images/services/prov3.png') ?>"
+                            alt="Cell C"
+                        >
+
+                    </div>
+
+                    <div>
+
+                        <h5>
+                            Cell C Airtime
+                        </h5>
+
+                        <p>
+                            Select an airtime amount
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="cellc-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close">
+
+                    <i class="bi bi-x-lg"></i>
+
+                </button>
+
+            </div>
+
+
+            <!-- MODAL BODY -->
+            <div class="cellc-modal-body">
+
+                <div class="cellc-title-row">
+
+                    <div>
+                        <h6>Select Amount</h6>
+
+                        <span>
+                            Choose the airtime value you want
+                        </span>
+                    </div>
+
+                    <div class="cellc-selected-badge"
+                         id="selectedAmountBadge">
+
+                        Select
+
+                    </div>
+
+                </div>
+
+
+                <!-- AMOUNT GRID -->
+                <div class="cellc-amount-grid">
+
+                    <button
+                        type="button"
+                        class="cellc-amount"
+                        data-amount="5"
+                        onclick="selectCellCAmount(this)">
+
+                        <span class="currency">R</span>
+                        <strong>5</strong>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="cellc-amount"
+                        data-amount="10"
+                        onclick="selectCellCAmount(this)">
+
+                        <span class="currency">R</span>
+                        <strong>10</strong>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="cellc-amount"
+                        data-amount="20"
+                        onclick="selectCellCAmount(this)">
+
+                        <span class="currency">R</span>
+                        <strong>20</strong>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="cellc-amount"
+                        data-amount="25"
+                        onclick="selectCellCAmount(this)">
+
+                        <span class="currency">R</span>
+                        <strong>25</strong>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="cellc-amount"
+                        data-amount="30"
+                        onclick="selectCellCAmount(this)">
+
+                        <span class="currency">R</span>
+                        <strong>30</strong>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="cellc-amount"
+                        data-amount="35"
+                        onclick="selectCellCAmount(this)">
+
+                        <span class="currency">R</span>
+                        <strong>35</strong>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="cellc-amount"
+                        data-amount="50"
+                        onclick="selectCellCAmount(this)">
+
+                        <span class="currency">R</span>
+                        <strong>50</strong>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="cellc-amount"
+                        data-amount="60"
+                        onclick="selectCellCAmount(this)">
+
+                        <span class="currency">R</span>
+                        <strong>60</strong>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="cellc-amount"
+                        data-amount="70"
+                        onclick="selectCellCAmount(this)">
+
+                        <span class="currency">R</span>
+                        <strong>70</strong>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="cellc-amount"
+                        data-amount="100"
+                        onclick="selectCellCAmount(this)">
+
+                        <span class="currency">R</span>
+                        <strong>100</strong>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="cellc-amount"
+                        data-amount="150"
+                        onclick="selectCellCAmount(this)">
+
+                        <span class="currency">R</span>
+                        <strong>150</strong>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="cellc-amount"
+                        data-amount="200"
+                        onclick="selectCellCAmount(this)">
+
+                        <span class="currency">R</span>
+                        <strong>200</strong>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="cellc-amount"
+                        data-amount="300"
+                        onclick="selectCellCAmount(this)">
+
+                        <span class="currency">R</span>
+                        <strong>300</strong>
+
+                    </button>
+
+                </div>
+
+
+                <!-- SELECTED AMOUNT -->
+                <div class="cellc-selection">
+
+                    <div class="selection-icon">
+
+                        <i class="bi bi-phone-fill"></i>
+
+                    </div>
+
+                    <div class="selection-info">
+
+                        <span>Selected Airtime</span>
+
+                        <strong id="selectedCellCAmount">
+                            No amount selected
+                        </strong>
+
+                    </div>
+
+                    <div class="selection-check"
+                         id="selectionCheck">
+
+                        <i class="bi bi-check2"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- MODAL FOOTER -->
+            <div class="cellc-modal-footer">
+
+                <button
+                    type="button"
+                    class="cellc-cancel-btn"
+                    data-bs-dismiss="modal">
+
+                    Cancel
+
+                </button>
+
+                <button
+                    type="button"
+                    class="cellc-continue-btn"
+                    id="cellcContinueBtn"
+                    onclick="continueCellCAirtime()"
+                    disabled>
+
+                    Continue
+
+                    <i class="bi bi-arrow-right"></i>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
 <!-- =========================================================
      JAVASCRIPT
 ========================================================= -->
+<script>
 
+let cellCModal;
+let selectedCellCAmount = null;
+
+
+/* =========================================================
+   OPEN CELL C MODAL
+========================================================= */
+
+function openCellCModal() {
+
+    selectedCellCAmount = null;
+
+    // Remove previous selection
+    document
+        .querySelectorAll('.cellc-amount')
+        .forEach(function(button) {
+
+            button.classList.remove('selected');
+
+        });
+
+
+    // Reset selection information
+
+    document.getElementById(
+        'selectedCellCAmount'
+    ).textContent = 'No amount selected';
+
+
+    document.getElementById(
+        'selectedAmountBadge'
+    ).textContent = 'Select';
+
+
+    document.getElementById(
+        'selectedAmountBadge'
+    ).classList.remove('active');
+
+
+    document.getElementById(
+        'selectionCheck'
+    ).classList.remove('active');
+
+
+    document.getElementById(
+        'cellcContinueBtn'
+    ).disabled = true;
+
+
+    // Open modal
+
+    cellCModal = new bootstrap.Modal(
+        document.getElementById('cellcModal')
+    );
+
+    cellCModal.show();
+}
+
+
+/* =========================================================
+   SELECT AMOUNT
+========================================================= */
+
+function selectCellCAmount(button) {
+
+    // Remove selected state
+    document
+        .querySelectorAll('.cellc-amount')
+        .forEach(function(item) {
+
+            item.classList.remove('selected');
+
+        });
+
+
+    // Select clicked amount
+    button.classList.add('selected');
+
+
+    selectedCellCAmount =
+        button.getAttribute('data-amount');
+
+
+    // Update badge
+
+    document.getElementById(
+        'selectedAmountBadge'
+    ).textContent =
+        'R ' + selectedCellCAmount;
+
+    document.getElementById(
+        'selectedAmountBadge'
+    ).classList.add('active');
+
+
+    // Update bottom selection
+
+    document.getElementById(
+        'selectedCellCAmount'
+    ).textContent =
+        'R ' + selectedCellCAmount +
+        ' Airtime';
+
+
+    document.getElementById(
+        'selectionCheck'
+    ).classList.add('active');
+
+
+    // Enable Continue
+
+    document.getElementById(
+        'cellcContinueBtn'
+    ).disabled = false;
+
+}
+
+
+/* =========================================================
+   CONTINUE
+========================================================= */
+
+function continueCellCAirtime() {
+
+    if (!selectedCellCAmount) {
+        return;
+    }
+
+
+    console.log(
+        'Selected Cell C Amount:',
+        selectedCellCAmount
+    );
+
+
+    /*
+     * HERE YOU CAN REDIRECT TO YOUR
+     * CELL C AIRTIME PURCHASE PAGE.
+     *
+     * Example:
+     *
+     * window.location.href =
+     *     "<?= base_url('cellc/airtime') ?>/" +
+     *     selectedCellCAmount;
+     */
+
+
+    // Example confirmation
+
+    alert(
+        'Cell C Airtime Selected: R ' +
+        selectedCellCAmount
+    );
+}
+
+</script>
 <script>
 
 
@@ -4105,7 +5158,9 @@ window.addEventListener(
 
 </script>
 
-
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
 </body>
 
 </html>
