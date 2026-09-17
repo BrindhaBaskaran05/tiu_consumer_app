@@ -610,8 +610,34 @@
 
         <div class="row g-3">
 
+        <!-- Top it Up voucher -->
+<div class="col-6 col-md-4 col-lg-2">
 
-            <!-- TOP IT UP VOUCHER -->
+    <div class="service-card cellc-service-card"
+         onclick="openCellCModal()">
+
+        <div class="service-image">
+
+            <img
+                src="<?= base_url('assets/images/services/Top it Up Voucher.png') ?>"
+                alt="Top it Up Voucher"
+            >
+
+        </div>
+
+        <div class="service-name">
+                 Top it Up Voucher
+        </div>
+
+        <div class="service-type">
+                  Top it Up Voucher
+        </div>
+
+    </div>
+
+</div>
+
+            <!-- TOP IT UP VOUCHER 
 
             <div class="col-6 col-md-4 col-lg-2">
 
@@ -637,7 +663,7 @@
                 </div>
 
             </div>
-
+-->
 <!-- Head-->
 <div class="col-6 col-md-4 col-lg-2">
 
@@ -2226,7 +2252,55 @@ window.addEventListener(
     }
 );
 
+function openCellCModal() {
 
+    selectedCellCAmount = null;
+
+    // Remove previous selection
+    document
+        .querySelectorAll('.cellc-amount')
+        .forEach(function(button) {
+
+            button.classList.remove('selected');
+
+        });
+
+
+    // Reset selection information
+
+    document.getElementById(
+        'selectedCellCAmount'
+    ).textContent = 'No amount selected';
+
+
+    document.getElementById(
+        'selectedAmountBadge'
+    ).textContent = 'Select';
+
+
+    document.getElementById(
+        'selectedAmountBadge'
+    ).classList.remove('active');
+
+
+    document.getElementById(
+        'selectionCheck'
+    ).classList.remove('active');
+
+
+    document.getElementById(
+        'cellcContinueBtn'
+    ).disabled = true;
+
+
+    // Open modal
+
+    cellCModal = new bootstrap.Modal(
+        document.getElementById('cellcModal')
+    );
+
+    cellCModal.show();
+}
 </script>
 
 <?= $this->include('layouts/footer') ?>
