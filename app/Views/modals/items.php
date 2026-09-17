@@ -77,7 +77,18 @@
 
                 <!-- AMOUNT GRID -->
                 <div class="cellc-amount-grid">
+<button
+                        type="button"
+                        class="cellc-amount"
+                        data-amount="5"
+                        onclick="openInputAmount(this)">
 
+                        <!--span class="currency">R</span-->
+                        <strong style="
+    font-size: 16px;
+">INPUT AMOUNT</strong>
+
+                    </button>
                     <button
                         type="button"
                         class="cellc-amount"
@@ -299,6 +310,7 @@
     </div>
 
 </div>
+<?= $this->include('modals/inputamount') ?>
 <script>
 
 let cellCModal;
@@ -456,4 +468,293 @@ function continueCellCAirtime() {
     );
 }
 
+/* =========================================================
+   CUSTOM INPUT AMOUNT
+========================================================= */
+
+let inputAmountModal;
+
+
+/*
+ * Open Custom Amount Modal
+ */
+function openInputAmount(button) {
+
+    // Clear previous values
+    document.getElementById('randsInput').value = '0';
+    document.getElementById('centsInput').value = '00';
+
+    updateAmountPreview();
+
+
+    /*
+     * Hide Cell C modal temporarily
+     */
+    const cellcModalElement =
+        document.getElementById('cellcModal');
+
+    const cellcModalInstance =
+        bootstrap.Modal.getInstance(cellcModalElement);
+
+    if (cellcModalInstance) {
+        cellcModalInstance.hide();
+    }
+
+
+    /*
+     * Open Custom Amount Modal
+     */
+    inputAmountModal =
+        new bootstrap.Modal(
+            document.getElementById('inputAmountModal'),
+            {
+                backdrop: 'static',
+                keyboard: false
+            }
+        );
+
+    inputAmountModal.show();
+}
+
+
+/*
+ * Update amount preview
+ */
+function updateAmountPreview() {
+
+    let rands =
+        document.getElementById('randsInput').value;
+
+    let cents =
+        document.getElementById('centsInput').value;
+
+
+    /*
+     * Allow numbers only
+     */
+    rands = rands.replace(/\D/g, '');
+    cents = cents.replace(/\D/g, '');
+
+
+    /*
+     * Limit cents to 2 digits
+     */
+    if (cents.length > 2) {
+        cents = cents.substring(0, 2);
+    }
+
+
+    /*
+     * Default values
+     */
+    if (rands === '') {
+        rands = '0';
+    }
+
+    if (cents === '') {
+        cents = '00';
+    }
+
+
+    document.getElementById('randsInput').value =
+        rands;
+
+    document.getElementById('centsInput').value =
+        cents;
+
+
+    /*
+     * Format cents
+     */
+    cents = cents.padEnd(2, '0');
+
+
+    /*
+     * Update preview
+     */
+    document.getElementById(
+        'amountPreview'
+    ).textContent =
+        parseInt(rands, 10) + '.' + cents;
+
+}
+
+
+/*
+ * Set quick amount
+ */
+function setCustomAmount(amount) {
+
+    document.getElementById(
+        'randsInput'
+    ).value = amount;
+
+    document.getElementById(
+        'centsInput'
+    ).value = '00';
+
+    updateAmountPreview();
+
+}
+
+
+/*
+ * Clear
+ */
+function clearInputAmount() {
+
+    document.getElementById(
+        'randsInput'
+    ).value = '0';
+
+    document.getElementById(
+        'centsInput'
+    ).value = '00';
+
+    updateAmountPreview();
+
+}
+
+
+/*
+ * Close Custom Amount Modal
+ */
+function closeInputAmount() {
+
+    if (inputAmountModal) {
+
+        inputAmountModal.hide();
+
+    }
+
+    /*
+     * Re-open Cell C modal
+     */
+    setTimeout(function() {
+
+        openCellCModal();
+
+    }, 250);
+
+}
+
+
+/*
+ * Process Custom Amount
+ */
+function processInputAmount() {
+
+    let rands =
+        document.getElementById(
+            'randsInput'
+        ).value;
+
+    let cents =
+        document.getElementById(
+            'centsInput'
+        ).value;
+
+
+    rands = rands.replace(/\D/g, '');
+    cents = cents.replace(/\D/g, '');
+
+
+    if (rands === '') {
+        rands = '0';
+    }
+
+    if (cents === '') {
+        cents = '00';
+    }
+
+    cents = cents.padEnd(2, '0');
+
+
+    let amount =
+        parseFloat(
+            rands + '.' + cents
+        );
+
+
+    /*
+     * Validate amount
+     */
+    if (amount <= 0) {
+
+        alert(
+            'Please enter a valid amount.'
+        );
+
+        return;
+    }
+
+
+    /*
+     * Set selected amount
+     *
+     * This connects the custom amount
+     * to your existing Cell C modal.
+     */
+
+    selectedCellCAmount =
+        amount.toFixed(2);
+
+
+    /*
+     * Close custom modal
+     */
+
+    if (inputAmountModal) {
+
+        inputAmountModal.hide();
+
+    }
+
+
+    /*
+     * Update Cell C modal
+     */
+
+    setTimeout(function() {
+
+        /*
+         * Re-open Cell C modal
+         */
+        openCellCModal();
+
+
+        /*
+         * Update selected amount
+         */
+
+        document.getElementById(
+            'selectedAmountBadge'
+        ).textContent =
+            'R ' + amount.toFixed(2);
+
+        document.getElementById(
+            'selectedAmountBadge'
+        ).classList.add('active');
+
+
+        document.getElementById(
+            'selectedCellCAmount'
+        ).textContent =
+            'R ' + amount.toFixed(2) +
+            ' Airtime';
+
+
+        document.getElementById(
+            'selectionCheck'
+        ).classList.add('active');
+
+
+        document.getElementById(
+            'cellcContinueBtn'
+        ).disabled = false;
+
+
+    }, 300);
+
+}
 </script>
