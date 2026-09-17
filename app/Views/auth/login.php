@@ -84,6 +84,38 @@
             line-height: 1.55;
         }
 
+        /* Flash messages from CI4 */
+        .flash-error {
+            background: rgba(191, 32, 53, 0.15);
+            border: 1px solid rgba(191, 32, 53, 0.5);
+            color: #ff8fa3;
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            text-align: center;
+            animation: shake 0.4s ease;
+        }
+
+        .flash-success {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.5);
+            color: #6ee7b7;
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-4px); }
+            75% { transform: translateX(4px); }
+        }
+
         .form-group { position: relative; margin-bottom: clamp(14px, 3vw, 20px); }
 
         .form-group input {
@@ -133,7 +165,9 @@
         }
 
         .form-group input:focus + label,
-        .form-group input:not(:placeholder-shown) + label {
+        .form-group input:not(:placeholder-shown) + label,
+        .form-group input:-webkit-autofill + label,
+        .form-group input:-webkit-autofill:focus + label {
             top: 0;
             left: 38px;
             font-size: 12px;
@@ -198,14 +232,43 @@
             user-select: none;
             -webkit-tap-highlight-color: transparent;
             font-weight: 500;
+            position: relative;
         }
 
-        .remember input {
-            width: 16px;
-            height: 16px;
-            accent-color: #bf2035;
+        .remember input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.35);
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.05);
             cursor: pointer;
+            transition: all 0.2s ease;
             flex-shrink: 0;
+            position: relative;
+        }
+
+        .remember input[type="checkbox"]:checked {
+            background: linear-gradient(135deg, #bf2035, #d93850);
+            border-color: transparent;
+            box-shadow: 0 0 12px rgba(191, 32, 53, 0.6);
+        }
+
+        .remember input[type="checkbox"]:checked::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 1px;
+            width: 5px;
+            height: 10px;
+            border: solid #fff;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        .remember input[type="checkbox"]:hover {
+            border-color: #bf2035;
         }
 
         .forgot {
@@ -309,45 +372,30 @@
         <h1 class="title">Login</h1>
         <p class="subtitle">Welcome back! Please log in to continue.</p>
 
-            <!-- SUCCESS MESSAGE -->
-            <?php if (session()->getFlashdata('success')): ?>
+        <!-- CI4 flash messages -->
+        <?php if (session()->getFlashdata('error')): ?>
+            <div class="flash-error"><?= esc(session()->getFlashdata('error')) ?></div>
+        <?php endif; ?>
 
-                <div class="alert alert-success">
-                    <?= esc(session()->getFlashdata('success')) ?>
-                </div>
+        <?php if (session()->getFlashdata('success')): ?>
+            <div class="flash-success"><?= esc(session()->getFlashdata('success')) ?></div>
+        <?php endif; ?>
 
-            <?php endif; ?>
+        <!-- CI4 validation errors -->
+        <?php if (session()->getFlashdata('errors')): ?>
+            <div class="flash-error">
+                <?php foreach (session()->getFlashdata('errors') as $err): ?>
+                    <?= esc($err) ?><br>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
 
+        <form action="<?= base_url('login') ?>" method="POST" autocomplete="off">
+            <?= csrf_field() ?>
 
-            <!-- GENERAL ERROR -->
-            <?php if (session()->getFlashdata('error')): ?>
-
-                <div class="alert alert-danger">
-                    <?= esc(session()->getFlashdata('error')) ?>
-                </div>
-
-            <?php endif; ?>
-
-
-            <!-- VALIDATION ERRORS -->
-            <?php if (session()->getFlashdata('errors')): ?>
-
-                <div class="alert alert-danger">
-
-                    <?php foreach (session()->getFlashdata('errors') as $error): ?>
-
-                        <div>
-                            <?= esc($error) ?>
-                        </div>
-
-                    <?php endforeach; ?>
-
-                </div>
-
-            <?php endif; ?>
-        <form action="#" method="POST" autocomplete="off">
             <div class="form-group">
-                <input type="email" id="email" name="email" placeholder=" " required>
+                <input type="email" id="email" name="email" placeholder=" " required
+                       value="<?= esc(old('email')) ?>">
                 <label for="email">Email Address</label>
                 <span class="input-icon">✉</span>
             </div>
@@ -361,7 +409,7 @@
 
             <div class="form-options">
                 <label class="remember">
-                    <input type="checkbox" name="remember"> Remember me
+                    <input type="checkbox" name="remember" value="1"> Remember me
                 </label>
                 <a href="#" class="forgot">Forgot password?</a>
             </div>
@@ -369,7 +417,7 @@
             <button type="submit" class="btn-primary">Login</button>
         </form>
 
-        <p class="switch-link">Don't have an account? <a  href="<?= base_url('register') ?>">Register here</a></p>
+        <p class="switch-link">Don't have an account? <a href="<?= base_url('register') ?>">Register here</a></p>
     </div>
 
     <script>

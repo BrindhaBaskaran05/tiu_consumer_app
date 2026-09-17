@@ -14,16 +14,17 @@ class AuthController extends BaseController
     public function store()
     {
         $rules = [
-            'first_name' => 'required|min_length[2]|max_length[100]',
-            'last_name'  => 'required|min_length[2]|max_length[100]',
-            'email'      => 'required|valid_email|max_length[191]|is_unique[users.email]',
-            'mobile'     => 'required|min_length[10]|max_length[20]',
-            'password'   => 'required|min_length[8]',
+            'first_name'       => 'required|min_length[2]|max_length[100]',
+            'last_name'        => 'required|min_length[2]|max_length[100]',
+            'email'            => 'required|valid_email|max_length[191]|is_unique[users.email]',
+            'mobile'           => 'required|min_length[10]|max_length[20]',
+            'password'         => 'required|min_length[8]',
+            'confirm_password' => 'required|matches[password]',
         ];
 
         if (!$this->validate($rules)) {
             return redirect()
-                ->back()
+                ->to('/register')
                 ->withInput()
                 ->with('errors', $this->validator->getErrors());
         }
@@ -46,57 +47,59 @@ class AuthController extends BaseController
             ->to('/login')
             ->with('success', 'Registration successful. Please login.');
     }
+
     public function login()
-{
-    return view('auth/login');
-}
-
-public function authenticate()
-{
-    $rules = [
-        'email'    => 'required|valid_email',
-        'password' => 'required',
-    ];
-
-    if (!$this->validate($rules)) {
-        return redirect()
-            ->back()
-            ->withInput()
-            ->with('errors', $this->validator->getErrors());
+    {
+        return view('auth/login');
     }
 
-    $userModel = new UserModel();
+    public function authenticate()
+    {
+        $rules = [
+            'email'    => 'required|valid_email',
+            'password' => 'required',
+        ];
 
-    $user = $userModel
-        ->where('email', $this->request->getPost('email'))
-        ->where('status', 1)
-        ->first();
+        if (!$this->validate($rules)) {
+            return redirect()
+                ->to('/login')
+                ->withInput()
+                ->with('errors', $this->validator->getErrors());
+        }
 
-    if (!$user || !password_verify(
-        $this->request->getPost('password'),
-        $user['password']
-    )) {
-        return redirect()
-            ->back()
-            ->withInput()
-            ->with('error', 'Invalid email or password.');
+        $userModel = new UserModel();
+
+        $user = $userModel
+            ->where('email', $this->request->getPost('email'))
+            ->where('status', 1)
+            ->first();
+
+        if (!$user || !password_verify(
+            $this->request->getPost('password'),
+            $user['password']
+        )) {
+            return redirect()
+                ->to('/login')
+                ->withInput()
+                ->with('error', 'Invalid email or password.');
+        }
+
+        session()->set([
+            'user_id'    => $user['id'],
+            'user_name'  => $user['first_name'] . ' ' . $user['last_name'],
+            'user_email' => $user['email'],
+            'isLoggedIn' => true,
+        ]);
+
+        return redirect()->to('/dashboard');
     }
 
-    session()->set([
-        'user_id'    => $user['id'],
-        'user_name'  => $user['first_name'] . ' ' . $user['last_name'],
-        'user_email' => $user['email'],
-        'isLoggedIn' => true,
-    ]);
+    public function logout()
+    {
+        session()->destroy();
 
-    return redirect()->to('/dashboard');
-}
-public function logout()
-{
-    session()->destroy();
-
-    return redirect()
-        ->to('/login')
-        ->with('success', 'You have been logged out successfully.');
-}
+        return redirect()
+            ->to('/login')
+            ->with('success', 'You have been logged out successfully.');
+    }
 }
